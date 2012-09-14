@@ -1,0 +1,7 @@
+ul.nav.nav-list
+  - @rim_classes.group_by(&:code_system_name).each do |cat,clss|
+    li.nav-header= cat
+    li.divider
+    - clss.sort_by(&:name).each do |cls|
+      li
+        = link_to cls.name, cls

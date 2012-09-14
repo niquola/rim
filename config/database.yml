@@ -1,0 +1,12 @@
+development: &base
+  adapter: postgresql
+  encoding: unicode
+  database: rim_dev
+
+test:
+  <<: *base
+  database: rim_test
+
+production:
+  <<: *base
+  database: rim

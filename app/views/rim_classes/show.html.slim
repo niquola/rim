@@ -1,0 +1,27 @@
+.row
+  .span3
+    .well.sidebar-nav= render 'classes'
+  .span9
+    .page-header
+      h1 #{@rim_class.name} (#{@rim_class.code_system_name}) < #{link_to(@rim_class.parent_name, {action: 'show', id: @rim_class.parent_name})}
+    - if @rim_class.definition
+      h3 Definition
+      p= @rim_class.definition
+      hr
+    - if @rim_class.usage_notes
+      h3 Usage Notes
+      p= @rim_class.usage_notes
+      hr
+    - if @rim_class.design_comments
+      h3 Design Comments
+      p= @rim_class.design_comments
+      hr
+    h3 Attributes
+    table.table
+      - @rim_class.rim_attributes.each do |attr|
+        tr
+          td
+            b= attr.name
+          td= attr.description
+    h3 XML
+    pre= @rim_class.xml
