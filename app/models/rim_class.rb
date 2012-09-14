@@ -15,6 +15,10 @@ class RimClass < ActiveRecord::Base
     @doc ||= Nokogiri::XML(self.xml)
   end
 
+  def formatted_xml
+    doc.to_xml( indent:1, indent_text:" ")
+  end
+
   def definition
     doc.xpath('//annotations/documentation/definition').first.try(:content).try(:strip)
   end
@@ -25,6 +29,10 @@ class RimClass < ActiveRecord::Base
 
   def design_comments
     doc.xpath('//annotations/documentation/designComments').first.try(:to_xml).try(:html_safe)
+  end
+
+  def other_annotation
+    doc.xpath('//annotations/documentation/otherAnnotation').first.try(:to_xml).try(:html_safe)
   end
 
   def code
