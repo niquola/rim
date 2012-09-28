@@ -11,6 +11,10 @@ class RimClass < ActiveRecord::Base
       xml[:name]
     end
 
+    def type
+      xml.xpath('./type').first[:name]
+    end
+
     def description
       xml.xpath('./annotations/documentation/definition').first.content.strip
     end
@@ -38,8 +42,13 @@ class RimClass < ActiveRecord::Base
     def max
       xml[:maximumMultiplicity]
     end
+
     def min
       xml[:minimumMultiplicity] 
+    end
+
+    def vocabulary
+      xml.xpath('./vocabulary/conceptDomain').first.try(:[],:name)
     end
   end
 

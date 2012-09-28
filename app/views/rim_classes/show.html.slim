@@ -32,7 +32,12 @@
       h3 id=attr.name
         span= attr.name
         span= attr.is_mandatory? ? '*' : ''
-        small  [#{attr.min},#{attr.max}] Conformance: #{attr.conformance}
+        span  (#{attr.type})
+        small
+          span  [#{attr.min},#{attr.max}]
+          span  Conformance: #{attr.conformance};
+          - if attr.vocabulary.present?
+            span  Vocabulary: #{attr.vocabulary};
       hr
       h4 Description
       p= attr.description
