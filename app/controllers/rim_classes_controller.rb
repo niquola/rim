@@ -5,6 +5,10 @@ class RimClassesController < ApplicationController
 
   def show
     @rim_class = RimClass.find(params[:id])
+    respond_to do |format|
+      format.xml  {render :xml => @rim_class.xml}
+      format.html
+    end
   end
   private
   def find_classes

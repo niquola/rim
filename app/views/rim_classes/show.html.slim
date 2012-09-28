@@ -1,9 +1,15 @@
 .row
   .span3
-    .well.sidebar-nav= render 'classes'
+    .well.sidebar-nav
+      ul.nav.nav-list
+        li.nav-header Attributes
+        - @rim_class.rim_attributes.each do |attr|
+          li
+            a href="##{attr.name}" #{attr.name}
   .span9
     .page-header
       h1 #{@rim_class.name} (#{@rim_class.code_system_name}) < #{link_to(@rim_class.parent_name, {action: 'show', id: @rim_class.parent_name})}
+    = link_to 'See original XMI',{action:'show', id: @rim_class, format:'xml'},{}
     - if @rim_class.definition
       h3 Definition
       p= @rim_class.definition
@@ -20,12 +26,20 @@
       h3 More
       p= @rim_class.other_annotation
       hr
-    h3 Attributes
-    table.table
-      - @rim_class.rim_attributes.each do |attr|
-        tr
-          td
-            b= attr.name
-          td= attr.description
-    h3 XML
-    pre= @rim_class.formatted_xml
+    h2 Attributes
+    hr
+    - @rim_class.rim_attributes.each do |attr|
+      h3 id=attr.name
+        span= attr.name
+        span= attr.is_mandatory? ? '*' : ''
+        small  [#{attr.min},#{attr.max}] Conformance: #{attr.conformance}
+      hr
+      h4 Description
+      p= attr.description
+      - if attr.usage_notes.present?
+        h4 Usage Notes
+        p= attr.usage_notes
+      - if attr.other_annotation.present?
+        h4 Other Annotations
+        p= attr.other_annotation
+      br

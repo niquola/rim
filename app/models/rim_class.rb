@@ -1,10 +1,45 @@
 class RimClass < ActiveRecord::Base
   class RimAttr
-    attr :name
+    attr :xml
     attr_accessor :description
 
-    def initialize(name)
-      @name = name
+    def initialize(xml)
+      @xml = xml
+    end
+
+    def name
+      xml[:name]
+    end
+
+    def description
+      xml.xpath('./annotations/documentation/definition').first.content.strip
+    end
+
+    def usage_notes
+      xml.xpath('./annotations//usageNotes/text').try(:to_xml).try(:html_safe)
+    end
+
+    def other_annotation
+      xml.xpath('./annotations//otherAnnotation/text').try(:to_xml).try(:html_safe)
+    end
+
+    def attrs
+      xml.attributes
+    end
+
+    def is_mandatory?
+      xml[:isMandatory] == 'true'
+    end
+
+    def conformance
+      xml[:conformance]
+    end
+
+    def max
+      xml[:maximumMultiplicity]
+    end
+    def min
+      xml[:minimumMultiplicity] 
     end
   end
 
@@ -45,9 +80,7 @@ class RimClass < ActiveRecord::Base
 
   def rim_attributes
     @rim_attributes ||= doc.xpath('//attribute').map do |attr|
-      rattr = RimAttr.new(attr[:name])
-      rattr.description = attr.xpath('./annotations/documentation/definition').first.content.strip
-      rattr
+      RimAttr.new(attr)
     end
   end
 end
