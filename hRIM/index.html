@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet/less" type="text/css" href="hrim.less" />
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js"></script>
+  </head>
+  <body>
+
+
+    <div class="h-left">
+      <div class="h-inbound">
+        <div class="h-act">Work List</div>
+        <div class="h-rel">has component</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-act">Review</div>
+        <div class="h-rel">has subject</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-act">Encounter</div>
+        <div class="h-rel">has component</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-act">Medication Issues</div>
+        <div class="h-rel">has subject</div>
+      </div>
+    </div>
+    <div class="h-class act">
+      <h3> Combined Medication Request</h3>
+      <ul class="h-attributes">
+        <li>classCode</li>
+        <li>moodCode</li>
+        <li>classCode</li>
+      </ul>
+    </div>
+    <div class="h-right">
+      <div class="h-inbound">
+        <div class="h-rel">has component</div>
+        <div class="h-act">Substance Administration Request</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">has component</div>
+        <div class="h-act">Substance Dispence Request</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">direct target</div>
+        <div class="h-act">Orderable Medication</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">precondition </div>
+        <div class="h-act">Order Verification</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">author </div>
+        <div class="h-act">Assigned Person</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">record target </div>
+        <div class="h-act">Patient</div>
+      </div>
+      <div class="h-inbound">
+        <div class="h-rel">subject</div>
+        <div class="h-act">Patient</div>
+      </div>
+    </div>
+  </body>
+</html>
+
